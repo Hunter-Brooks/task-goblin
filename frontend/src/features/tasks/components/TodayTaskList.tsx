@@ -21,9 +21,11 @@ export function TodayTaskList() {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
-  const todayTasks = tasks?.filter((task) => {
-    if (task.status === 'COMPLETED') return false
+  // Get all active tasks
+  const activeTasks = tasks?.filter((task) => task.status !== 'COMPLETED') || []
 
+  // First, try to get priority/dated tasks
+  const priorityAndDatedTasks = activeTasks.filter((task) => {
     // Include high-priority tasks
     if (task.priority === 'HIGH') return true
 
@@ -35,7 +37,18 @@ export function TodayTaskList() {
     }
 
     return false
-  }) || []
+  })
+
+  // If we have priority/dated tasks, use those. Otherwise show all active tasks.
+  let todayTasks = priorityAndDatedTasks.length > 0 
+    ? priorityAndDatedTasks 
+    : activeTasks
+
+  // Sort by priority: HIGH > MEDIUM > LOW
+  const priorityOrder = { HIGH: 1, MEDIUM: 2, LOW: 3 }
+  todayTasks = todayTasks.sort((a, b) => 
+    priorityOrder[a.priority] - priorityOrder[b.priority]
+  )
 
   const handleToggleComplete = async (task: Task) => {
     const newStatus = task.status === 'COMPLETED' ? 'ACTIVE' : 'COMPLETED'
@@ -79,10 +92,13 @@ export function TodayTaskList() {
     return <TaskForm task={editingTask} onCancel={() => setEditingTask(null)} />
   }
 
+  // Determine what we're showing
+  const showingPriorityTasks = priorityAndDatedTasks.length > 0
+
   if (!todayTasks.length) {
     return (
       <div className="panel">
-        <h3>No tasks for today</h3>
+        <h3>No tasks</h3>
         <p className="muted">All clear! Use quick capture (✚ or press Q) to add new items.</p>
       </div>
     )
@@ -90,7 +106,12 @@ export function TodayTaskList() {
 
   return (
     <div className="panel">
-      <h3>Today's Tasks</h3>
+      <h3>{showingPriorityTasks ? "Today's Focus" : "All Tasks"}</h3>
+      {!showingPriorityTasks && (
+        <p className="muted" style={{ marginTop: '0.5rem' }}>
+          Showing all tasks by priority. Add due dates or set high priority to focus your list.
+        </p>
+      )}
       <ul className="task-list">
         {todayTasks.map((task) => (
           <li key={task.id} className={task.status === 'COMPLETED' ? 'completed' : ''}>
