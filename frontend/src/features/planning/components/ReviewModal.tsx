@@ -23,8 +23,13 @@ export function ReviewModal({ onClose, onContinue }: ReviewModalProps) {
 			<div className="modal-overlay" onClick={onClose}>
 				<div className="modal-content review-modal" onClick={(e) => e.stopPropagation()}>
 					<h2>Unable to load review</h2>
+					<p className="muted">
+						Couldn't load yesterday's summary. You can still start your day.
+					</p>
 					<div className="modal-actions">
-						<button onClick={onContinue}>Continue Anyway</button>
+						<button onClick={onContinue} className="btn-primary">
+							Continue Anyway
+						</button>
 						<button onClick={onClose} className="btn-secondary">
 							Cancel
 						</button>

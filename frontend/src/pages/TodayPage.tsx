@@ -30,8 +30,13 @@ export function TodayPage() {
 	}
 
 	const handleReviewContinue = async () => {
-		setShowReview(false)
-		await startDay.mutateAsync()
+		try {
+			await startDay.mutateAsync()
+			setShowReview(false)
+		} catch (error) {
+			console.error('Failed to start day:', error)
+			setShowReview(false)
+		}
 	}
 
 	const hasPlan = todaysPlan !== null && todaysPlan !== undefined

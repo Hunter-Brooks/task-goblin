@@ -11,6 +11,8 @@ export function useTodaysPlan() {
 	return useQuery<DailyPlan | null>({
 		queryKey: ['dailyPlan', 'today'],
 		queryFn: getTodaysPlan,
+		retry: 1,
+		refetchOnWindowFocus: false,
 	})
 }
 
@@ -30,5 +32,6 @@ export function usePreviousDayReview() {
 		queryKey: ['dailyPlan', 'review', 'previous'],
 		queryFn: getPreviousDayReview,
 		staleTime: 5 * 60 * 1000, // 5 minutes
+		retry: 1,
 	})
 }
