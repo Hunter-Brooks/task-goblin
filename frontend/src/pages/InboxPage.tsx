@@ -1,4 +1,3 @@
-import { InboxForm } from '../features/inbox/components/InboxForm'
 import { InboxList } from '../features/inbox/components/InboxList'
 
 export function InboxPage() {
@@ -6,9 +5,8 @@ export function InboxPage() {
     <section className="page-grid">
       <div>
         <h2>Inbox</h2>
-        <p className="muted">Capture thoughts without deciding where they belong.</p>
+        <p className="muted">Use the quick capture button (✚) or press Q to capture thoughts from anywhere.</p>
       </div>
-      <InboxForm />
       <InboxList />
     </section>
   )
