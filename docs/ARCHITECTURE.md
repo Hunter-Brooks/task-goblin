@@ -391,8 +391,8 @@ frontend/src/
 
 ## Implementation Status
 
-✅ **Milestone 1-3 Complete:** Task management, Inbox system, Today experience
-⏳ **Future:** Planning, Focus, Habits features
+✅ **Milestones 1-5 Complete:** Task management, Inbox system, Today experience, Daily Planning, Big Three System
+⏳ **Future:** Projects (Milestone 6), Habits (Milestone 7), Focus Mode (Milestone 8)
 11. Navigation
 
 Primary navigation remains intentionally small.

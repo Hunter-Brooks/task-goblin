@@ -73,10 +73,18 @@ export function BigThreeDisplay() {
     );
   }
 
+  const allCompleted = bigThree.every((task) => task.status === "COMPLETED");
+
   return (
     <section className="big-three-section">
       <h2>🎯 Big Three</h2>
-      <p className="muted">Your three most important tasks today</p>
+      {allCompleted ? (
+        <p className="big-three-complete">
+          🎉 Outstanding! You've completed all three priorities! 🎉
+        </p>
+      ) : (
+        <p className="muted">Your three most important tasks today</p>
+      )}
       <ul className="big-three-list">
         {bigThree.map((task, index) => (
           <li

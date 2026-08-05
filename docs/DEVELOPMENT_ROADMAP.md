@@ -394,13 +394,31 @@ Show:
 
 Create focused daily priorities.
 
+## Status: ✅ COMPLETE
+
+Branch: `milestone-5` (9 commits)
+
+Implemented:
+
+✅ DailyPlanTask entity (join table with dailyPlanId, taskId, position)
+✅ DailyPlanTaskRepository with custom queries
+✅ Auto-selection algorithm (overdue → due soonest → priority → age)
+✅ Manual selection UI on Planning page with visual feedback
+✅ Display on Today page with completion tracking
+✅ Due date display with overdue/today highlighting
+✅ Auto-refill when Big Three task deleted
+✅ Auto-refresh on task create/update/delete
+✅ Transaction handling for data mutations
+✅ Review modal shows previous day's Big Three
+✅ Comprehensive CSS styling
+
 ---
 
 Rules:
 
 - Exactly three priorities.
 - Selected during planning.
-- Do not automatically refill.
+- Auto-refills when task deleted (maintains 3 active tasks).
 - Reviewed the next day.
 
 ---
@@ -501,6 +519,30 @@ Future AI features:
 
 Not part of MVP:
 
+## Achievements & Stats
+
+- Track productivity metrics
+- Task completion streaks
+- Big Three completion rate
+- Daily planning consistency
+- Badges/achievements system
+- Weekly/monthly summaries
+- Productivity insights dashboard
+- Goal tracking and milestones
+
+---
+
+## Task Categories
+
+- Custom task categories/tags
+- Category-based filtering
+- Color coding by category
+- Category statistics
+- Multi-category support per task
+- Category presets (Work, Personal, Health, etc.)
+
+---
+
 ## Task Archive
 
 - Archive completed tasks instead of hiding them
@@ -568,6 +610,8 @@ Focus on:
 
 # Current Next Action
 
-Complete Milestone 1:
+Milestones 1-5 complete.
 
-**Make tasks fully manageable before adding new systems.**
+**Next: Milestone 6 — Organization (Projects)**
+
+Consider implementing task categories and achievements as incremental enhancements alongside core milestones.
