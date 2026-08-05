@@ -1,4 +1,6 @@
+import { useState, useEffect } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
+import { GlobalQuickCapture } from './GlobalQuickCapture'
 
 const links = [
   { to: '/', label: 'Today', end: true },
@@ -9,6 +11,25 @@ const links = [
 ]
 
 export function AppLayout() {
+  const [showQuickCapture, setShowQuickCapture] = useState(false)
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      // Only trigger if not typing in an input/textarea
+      if (event.key === 'q' && !['INPUT', 'TEXTAREA'].includes((event.target as HTMLElement).tagName)) {
+        event.preventDefault()
+        setShowQuickCapture(true)
+      }
+      // ESC to close
+      if (event.key === 'Escape' && showQuickCapture) {
+        setShowQuickCapture(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyPress)
+    return () => window.removeEventListener('keydown', handleKeyPress)
+  }, [showQuickCapture])
+
   return (
     <div className="app-shell">
       <aside className="sidebar">
@@ -28,6 +49,10 @@ export function AppLayout() {
       <main className="content">
         <Outlet />
       </main>
+      <button className="fab-quick-capture" onClick={() => setShowQuickCapture(true)} title="Quick Capture (Press Q)">
+        ✚
+      </button>
+      <GlobalQuickCapture isOpen={showQuickCapture} onClose={() => setShowQuickCapture(false)} />
     </div>
   )
 }
