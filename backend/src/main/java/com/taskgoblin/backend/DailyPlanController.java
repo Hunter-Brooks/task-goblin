@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -178,8 +179,18 @@ public class DailyPlanController {
         }
         
         List<Long> taskIds = bigThreeTasks.stream().map(DailyPlanTask::getTaskId).toList();
-        
         List<Task> tasks = getTasksInOrder(taskIds);
+        
+        // Check if any tasks were deleted - if so, refill Big Three
+        if (tasks.size() < bigThreeTasks.size()) {
+            // Some tasks no longer exist, clean up and refill
+            cleanupAndRefillBigThree(todayPlan, tasks);
+            // Fetch again after refill
+            bigThreeTasks = dailyPlanTaskRepository.findByDailyPlanIdOrderByPosition(todayPlan.getId());
+            taskIds = bigThreeTasks.stream().map(DailyPlanTask::getTaskId).toList();
+            tasks = getTasksInOrder(taskIds);
+        }
+        
         return ResponseEntity.ok(tasks);
     }
     
@@ -215,6 +226,44 @@ public class DailyPlanController {
             .map(taskMap::get)
             .filter(t -> t != null)
             .collect(Collectors.toList());
+    }
+    
+    @Transactional
+    private void cleanupAndRefillBigThree(DailyPlan plan, List<Task> existingValidTasks) {
+        // Delete all existing Big Three entries (including invalid ones)
+        dailyPlanTaskRepository.deleteByDailyPlanId(plan.getId());
+        
+        LocalDate today = LocalDate.now();
+        
+        // Get existing valid task IDs
+        List<Long> existingTaskIds = existingValidTasks.stream()
+            .map(Task::getId)
+            .collect(Collectors.toList());
+        
+        // Get all active tasks excluding the ones already selected
+        List<Task> candidates = taskRepository.findAll().stream()
+            .filter(t -> t.getStatus() == TaskStatus.ACTIVE)
+            .filter(t -> !existingTaskIds.contains(t.getId()))
+            .sorted(createBigThreeComparator(today))
+            .limit(3 - existingValidTasks.size())
+            .collect(Collectors.toList());
+        
+        // Combine existing valid tasks with new candidates
+        List<Task> finalBigThree = new ArrayList<>();
+        finalBigThree.addAll(existingValidTasks);
+        finalBigThree.addAll(candidates);
+        
+        // Sort the combined list by our Big Three criteria
+        finalBigThree = finalBigThree.stream()
+            .sorted(createBigThreeComparator(today))
+            .limit(3)
+            .collect(Collectors.toList());
+        
+        // Save as Big Three with correct positions
+        for (int i = 0; i < finalBigThree.size(); i++) {
+            DailyPlanTask dpt = new DailyPlanTask(plan.getId(), finalBigThree.get(i).getId(), i + 1);
+            dailyPlanTaskRepository.save(dpt);
+        }
     }
     
     private void autoSelectBigThreeIfNeeded(DailyPlan plan) {
