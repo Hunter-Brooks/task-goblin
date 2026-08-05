@@ -15,6 +15,7 @@ See [DEVELOPMENT_ROADMAP.md](docs/DEVELOPMENT_ROADMAP.md) for detailed feature b
 ## Features
 
 ### Current Features
+
 - **Task Management:** Create, edit, delete, and complete tasks with priorities and due dates
 - **Quick Capture:** Global quick capture accessible via FAB button (✚) or keyboard shortcut (Q)
 - **Inbox:** Capture ideas quickly and convert them to tasks during planning
@@ -22,6 +23,7 @@ See [DEVELOPMENT_ROADMAP.md](docs/DEVELOPMENT_ROADMAP.md) for detailed feature b
 - **Navigation:** Clean sidebar navigation between Today, Tasks, and Inbox pages
 
 ### Coming Soon
+
 - Daily Planning workflow (Milestone 4)
 - Big Three daily priorities (Milestone 5)
 - Focus Mode and Morning Habits (Milestone 6)
