@@ -46,6 +46,31 @@ export function BigThreeSelector() {
     JSON.stringify(selectedIds.sort()) !==
     JSON.stringify((bigThree?.map((t) => t.id) || []).sort());
 
+  const formatDueDate = (dateString?: string) => {
+    if (!dateString) return null;
+    // Parse date as local date to avoid timezone issues
+    const [year, month, day] = dateString.split("-").map(Number);
+    const date = new Date(year, month - 1, day);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const dueDate = new Date(date);
+    dueDate.setHours(0, 0, 0, 0);
+
+    const isOverdue = dueDate < today;
+    const isToday = dueDate.getTime() === today.getTime();
+
+    let className = "due-date";
+    if (isOverdue) className += " overdue";
+    if (isToday) className += " today";
+
+    return (
+      <span className={className}>
+        {isOverdue ? "⚠️ " : ""}
+        {date.toLocaleDateString()}
+      </span>
+    );
+  };
+
   return (
     <section className="panel">
       <h3>🎯 Select Big Three</h3>
@@ -81,6 +106,7 @@ export function BigThreeSelector() {
                   <div className="selector-content">
                     <strong>{task.title}</strong>
                     {task.description && <p>{task.description}</p>}
+                    {task.dueDate && <div>{formatDueDate(task.dueDate)}</div>}
                   </div>
                   <span className={`pill priority-${task.priority.toLowerCase()}`}>
                     {task.priority}
