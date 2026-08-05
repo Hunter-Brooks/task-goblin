@@ -501,6 +501,16 @@ Future AI features:
 
 Not part of MVP:
 
+## Task Archive
+
+- Archive completed tasks instead of hiding them
+- View archived tasks
+- Search archive
+- Restore from archive
+- Archive statistics/history
+
+---
+
 ## Quick Capture
 
 - Global shortcut

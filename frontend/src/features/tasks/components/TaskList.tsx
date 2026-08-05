@@ -17,7 +17,11 @@ export function TaskList() {
     return <div className="panel error">Unable to load tasks.</div>;
   }
 
-  if (!tasks?.length) {
+  // Filter out completed tasks (they will be archived in the future)
+  const activeTasks =
+    tasks?.filter((task) => task.status !== "COMPLETED") || [];
+
+  if (!activeTasks.length) {
     return (
       <div className="panel">
         No tasks yet. Capture your first task to get started.
@@ -75,7 +79,7 @@ export function TaskList() {
     <div className="panel">
       <h2>Tasks</h2>
       <ul className="task-list">
-        {tasks.map((task) => (
+        {activeTasks.map((task) => (
           <li
             key={task.id}
             className={task.status === "COMPLETED" ? "completed" : ""}

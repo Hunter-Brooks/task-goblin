@@ -509,7 +509,9 @@ button:disabled {
   color: #06281d;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .btn-start-day:hover {
