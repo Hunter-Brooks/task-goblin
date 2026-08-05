@@ -336,6 +336,25 @@ Add:
 
 Create the planning workflow.
 
+## Status: ✅ COMPLETE
+
+Branch: `milestone-4`
+
+Implemented:
+
+✅ DailyPlan entity backend (id, date, started, createdAt)
+✅ DailyPlanRepository with date lookup
+✅ DailyPlanController with REST endpoints
+✅ Frontend API layer for daily plans
+✅ Daily plan hooks (useTodaysPlan, useStartDay, usePreviousDayReview)
+✅ ReviewModal showing previous day's summary
+✅ Start Day flow on Today page (manual, not automatic)
+✅ Review showing: completed tasks, unfinished high priority, overdue tasks
+✅ Planning page structure with inbox counter
+✅ User-initiated day start (not automatic at midnight)
+
+The daily planning workflow is now functional. Users can start their day intentionally by reviewing yesterday and choosing to begin today.
+
 ---
 
 ## Start Day Flow
