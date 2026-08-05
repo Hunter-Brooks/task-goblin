@@ -21,7 +21,7 @@ If Maven Wrapper is unavailable in your environment, use your installed Maven:
 mvn spring-boot:run
 ```
 
-The backend defaults to `http://localhost:8080` and stores data in `backend/task-goblin.db`. Override with environment variables such as `TASK_GOBLIN_DB_URL`, `TASK_GOBLIN_DDL_AUTO`, `TASK_GOBLIN_SHOW_SQL`, `TASK_GOBLIN_CORS_ALLOWED_ORIGIN`, and `SERVER_PORT`.
+The backend defaults to `http://localhost:8080` and stores data in `backend/data/task-goblin.db`. Override with environment variables such as `TASK_GOBLIN_DB_URL`, `TASK_GOBLIN_DDL_AUTO`, `TASK_GOBLIN_SHOW_SQL`, `TASK_GOBLIN_CORS_ALLOWED_ORIGIN`, and `SERVER_PORT`.
 
 ## Run the frontend
 
