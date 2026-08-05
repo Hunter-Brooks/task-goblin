@@ -25,3 +25,29 @@ export async function createTask(task: TaskInput): Promise<Task> {
 
   return response.json()
 }
+
+export async function updateTask(id: number, task: Partial<Task>): Promise<Task> {
+  const response = await fetch(`${API_BASE_URL}/api/tasks/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(task),
+  })
+
+  if (!response.ok) {
+    throw new Error('Failed to update task')
+  }
+
+  return response.json()
+}
+
+export async function deleteTask(id: number): Promise<void> {
+  const response = await fetch(`${API_BASE_URL}/api/tasks/${id}`, {
+    method: 'DELETE',
+  })
+
+  if (!response.ok) {
+    throw new Error('Failed to delete task')
+  }
+}
