@@ -267,6 +267,23 @@ The user should immediately know:
 
 "What should I do right now?"
 
+## Status: ✅ COMPLETE
+
+Branch: `milestone-3`
+
+Implemented:
+
+✅ TodayTaskList component with smart filtering
+✅ Personalized greeting (Good morning/afternoon/evening)
+✅ Date display in readable format (e.g., "Monday, January 15, 2024")
+✅ Big Three placeholder section (prepared for Milestone 5)
+✅ Today-focused styling with gradient heading
+✅ Empty state when no tasks for today
+✅ Filters: Tasks due today OR overdue, high-priority tasks
+✅ Excludes completed tasks from today view
+
+The Today page now answers "What should I do right now?" by showing only relevant tasks without overwhelming the user with the complete backlog.
+
 ---
 
 ## Today Page
