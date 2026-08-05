@@ -1,18 +1,18 @@
-import { TodayTaskList } from '../features/tasks/components/TodayTaskList'
+import { TodayTaskList } from "../features/tasks/components/TodayTaskList";
 
 export function TodayPage() {
-  const now = new Date()
-  const dateString = now.toLocaleDateString('en-US', { 
-    weekday: 'long', 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
-  })
-  
-  const hour = now.getHours()
-  let greeting = 'Good evening'
-  if (hour < 12) greeting = 'Good morning'
-  else if (hour < 18) greeting = 'Good afternoon'
+  const now = new Date();
+  const dateString = now.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  const hour = now.getHours();
+  let greeting = "Good evening";
+  if (hour < 12) greeting = "Good morning";
+  else if (hour < 18) greeting = "Good afternoon";
 
   return (
     <div className="today-page">
@@ -22,7 +22,7 @@ export function TodayPage() {
           <p className="today-date">{dateString}</p>
         </div>
       </header>
-      
+
       <div className="today-content">
         <section className="big-three-placeholder">
           <h3>🎯 Big Three</h3>
@@ -32,9 +32,9 @@ export function TodayPage() {
             <small>Coming in Milestone 5</small>
           </p>
         </section>
-        
+
         <TodayTaskList />
       </div>
     </div>
-  )
+  );
 }

@@ -1,10 +1,10 @@
 export interface InboxItem {
-  id: number
-  content: string
-  createdAt: string
-  processed: boolean
+  id: number;
+  content: string;
+  createdAt: string;
+  processed: boolean;
 }
 
 export interface InboxItemInput {
-  content: string
+  content: string;
 }

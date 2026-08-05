@@ -1,27 +1,29 @@
-import { useState } from 'react'
-import { useCreateInboxItem } from '../hooks/useInbox'
+import { useState } from "react";
+import { useCreateInboxItem } from "../hooks/useInbox";
 
 export function InboxForm() {
-  const createItem = useCreateInboxItem()
-  const [content, setContent] = useState('')
+  const createItem = useCreateInboxItem();
+  const [content, setContent] = useState("");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+    event.preventDefault();
     if (!content.trim()) {
-      return
+      return;
     }
 
     await createItem.mutateAsync({
       content: content.trim(),
-    })
+    });
 
-    setContent('')
-  }
+    setContent("");
+  };
 
   return (
     <form className="panel inbox-form" onSubmit={handleSubmit}>
       <h2>Quick Capture</h2>
-      <p className="muted">Record thoughts without deciding where they belong.</p>
+      <p className="muted">
+        Record thoughts without deciding where they belong.
+      </p>
       <label>
         <textarea
           value={content}
@@ -32,9 +34,11 @@ export function InboxForm() {
         />
       </label>
       <button type="submit" disabled={createItem.isPending}>
-        {createItem.isPending ? 'Capturing…' : 'Capture'}
+        {createItem.isPending ? "Capturing…" : "Capture"}
       </button>
-      {createItem.isError && <p className="error">Unable to capture right now.</p>}
+      {createItem.isError && (
+        <p className="error">Unable to capture right now.</p>
+      )}
     </form>
-  )
+  );
 }

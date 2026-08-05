@@ -269,20 +269,21 @@ The user should immediately know:
 
 ## Status: ✅ COMPLETE
 
-Branch: `milestone-3`
+Branch: `milestone-3` (merged to main)
 
 Implemented:
 
-✅ TodayTaskList component with smart filtering
+✅ TodayTaskList component displaying all active tasks
 ✅ Personalized greeting (Good morning/afternoon/evening)
 ✅ Date display in readable format (e.g., "Monday, January 15, 2024")
 ✅ Big Three placeholder section (prepared for Milestone 5)
 ✅ Today-focused styling with gradient heading
-✅ Empty state when no tasks for today
-✅ Filters: Tasks due today OR overdue, high-priority tasks
+✅ Empty state when no tasks exist
+✅ All tasks sorted by priority (HIGH → MEDIUM → LOW)
 ✅ Excludes completed tasks from today view
+✅ Clean, focused layout below Big Three placeholder
 
-The Today page now answers "What should I do right now?" by showing only relevant tasks without overwhelming the user with the complete backlog.
+The Today page now provides a clear view of all active work sorted by priority, with the Big Three section prominently positioned at the top for future milestone implementation.
 
 ---
 
