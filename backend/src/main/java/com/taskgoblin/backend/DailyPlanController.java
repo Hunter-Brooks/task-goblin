@@ -16,10 +16,12 @@ public class DailyPlanController {
     
     private final DailyPlanRepository dailyPlanRepository;
     private final TaskRepository taskRepository;
+    private final DailyPlanTaskRepository dailyPlanTaskRepository;
     
-    public DailyPlanController(DailyPlanRepository dailyPlanRepository, TaskRepository taskRepository) {
+    public DailyPlanController(DailyPlanRepository dailyPlanRepository, TaskRepository taskRepository, DailyPlanTaskRepository dailyPlanTaskRepository) {
         this.dailyPlanRepository = dailyPlanRepository;
         this.taskRepository = taskRepository;
+        this.dailyPlanTaskRepository = dailyPlanTaskRepository;
     }
     
     @PostMapping("/start")
@@ -103,6 +105,64 @@ public class DailyPlanController {
         review.put("hadPlan", yesterdayPlan != null);
         review.put("planWasStarted", yesterdayPlan != null && yesterdayPlan.isStarted());
         
+        // Get yesterday's Big Three
+        List<Task> yesterdayBigThree = List.of();
+        if (yesterdayPlan != null) {
+            List<DailyPlanTask> bigThreeTasks = dailyPlanTaskRepository.findByDailyPlanIdOrderByPosition(yesterdayPlan.getId());
+            List<Long> taskIds = bigThreeTasks.stream().map(DailyPlanTask::getTaskId).toList();
+            yesterdayBigThree = allTasks.stream()
+                .filter(t -> taskIds.contains(t.getId()))
+                .toList();
+        }
+        review.put("bigThree", yesterdayBigThree);
+        
         return ResponseEntity.ok(review);
+    }
+    
+    @PutMapping("/big-three")
+    public ResponseEntity<List<Task>> updateBigThree(@RequestBody List<Long> taskIds) {
+        // Validate: must have 0-3 task IDs
+        if (taskIds.size() > 3) {
+            return ResponseEntity.badRequest().build();
+        }
+        
+        LocalDate today = LocalDate.now();
+        
+        // Get or create today's plan
+        DailyPlan todayPlan = dailyPlanRepository.findByDate(today)
+            .orElseGet(() -> {
+                DailyPlan newPlan = new DailyPlan(today);
+                return dailyPlanRepository.save(newPlan);
+            });
+        
+        // Delete existing Big Three for today
+        dailyPlanTaskRepository.deleteByDailyPlanId(todayPlan.getId());
+        
+        // Create new Big Three entries
+        for (int i = 0; i < taskIds.size(); i++) {
+            Long taskId = taskIds.get(i);
+            DailyPlanTask dpt = new DailyPlanTask(todayPlan.getId(), taskId, i + 1);
+            dailyPlanTaskRepository.save(dpt);
+        }
+        
+        // Return the tasks
+        List<Task> tasks = taskRepository.findAllById(taskIds);
+        return ResponseEntity.ok(tasks);
+    }
+    
+    @GetMapping("/big-three")
+    public ResponseEntity<List<Task>> getBigThree() {
+        LocalDate today = LocalDate.now();
+        
+        DailyPlan todayPlan = dailyPlanRepository.findByDate(today).orElse(null);
+        if (todayPlan == null) {
+            return ResponseEntity.ok(List.of());
+        }
+        
+        List<DailyPlanTask> bigThreeTasks = dailyPlanTaskRepository.findByDailyPlanIdOrderByPosition(todayPlan.getId());
+        List<Long> taskIds = bigThreeTasks.stream().map(DailyPlanTask::getTaskId).toList();
+        
+        List<Task> tasks = taskRepository.findAllById(taskIds);
+        return ResponseEntity.ok(tasks);
     }
 }

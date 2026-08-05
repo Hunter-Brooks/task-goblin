@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useInboxItems } from "../features/inbox/hooks/useInbox";
+import { BigThreeSelector } from "../features/planning/components/BigThreeSelector";
 
 export function PlanningPage() {
   const { data: inboxItems } = useInboxItems();
@@ -31,14 +32,7 @@ export function PlanningPage() {
           )}
         </section>
 
-        <section className="panel">
-          <h3>🎯 Select Big Three</h3>
-          <p className="muted">
-            Choose your three most important tasks for today.
-            <br />
-            <small>Coming in Milestone 5</small>
-          </p>
-        </section>
+        <BigThreeSelector />
 
         <section className="panel">
           <h3>📊 Priority Matrix</h3>

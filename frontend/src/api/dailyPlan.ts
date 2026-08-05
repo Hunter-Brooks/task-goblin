@@ -40,6 +40,16 @@ export interface PreviousDayReview {
   }>;
   hadPlan: boolean;
   planWasStarted: boolean;
+  bigThree: Array<{
+    id: number;
+    title: string;
+    description?: string;
+    status: string;
+    priority: string;
+    dueDate?: string;
+    createdAt: string;
+    completedAt?: string;
+  }>;
 }
 
 export async function startDay(): Promise<DailyPlan> {
@@ -99,6 +109,55 @@ export async function getPreviousDayReview(): Promise<PreviousDayReview> {
     return response.json();
   } catch (error) {
     console.error("Error fetching previous day review:", error);
+    throw error;
+  }
+}
+
+export interface BigThreeTask {
+  id: number;
+  title: string;
+  description?: string;
+  status: string;
+  priority: string;
+  dueDate?: string;
+  createdAt: string;
+  completedAt?: string;
+}
+
+export async function updateBigThree(taskIds: number[]): Promise<BigThreeTask[]> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/daily-plan/big-three`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(taskIds),
+    });
+
+    if (!response.ok) {
+      console.error("Failed to update Big Three:", response.status);
+      throw new Error("Failed to update Big Three");
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error updating Big Three:", error);
+    throw error;
+  }
+}
+
+export async function getBigThree(): Promise<BigThreeTask[]> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/daily-plan/big-three`);
+
+    if (!response.ok) {
+      console.error("Failed to fetch Big Three:", response.status);
+      throw new Error("Failed to fetch Big Three");
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error fetching Big Three:", error);
     throw error;
   }
 }
