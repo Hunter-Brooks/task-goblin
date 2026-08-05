@@ -1,4 +1,10 @@
+import { useState } from "react";
 import { TodayTaskList } from "../features/tasks/components/TodayTaskList";
+import {
+  useTodaysPlan,
+  useStartDay,
+} from "../features/planning/hooks/useDailyPlan";
+import { ReviewModal } from "../features/planning/components/ReviewModal";
 
 export function TodayPage() {
   const now = new Date();
@@ -14,6 +20,44 @@ export function TodayPage() {
   if (hour < 12) greeting = "Good morning";
   else if (hour < 18) greeting = "Good afternoon";
 
+  const { data: todaysPlan, isLoading } = useTodaysPlan();
+  const startDay = useStartDay();
+  const [showReview, setShowReview] = useState(false);
+
+  const handleStartDay = () => {
+    setShowReview(true);
+  };
+
+  const handleReviewClose = () => {
+    setShowReview(false);
+  };
+
+  const handleReviewContinue = async () => {
+    try {
+      await startDay.mutateAsync();
+      setShowReview(false);
+    } catch (error) {
+      console.error("Failed to start day:", error);
+      setShowReview(false);
+    }
+  };
+
+  const hasPlan = todaysPlan !== null && todaysPlan !== undefined;
+
+  if (isLoading) {
+    return (
+      <div className="today-page">
+        <header className="today-header">
+          <div className="greeting-section">
+            <h1>{greeting}</h1>
+            <p className="today-date">{dateString}</p>
+          </div>
+        </header>
+        <div className="panel">Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="today-page">
       <header className="today-header">
@@ -23,18 +67,41 @@ export function TodayPage() {
         </div>
       </header>
 
-      <div className="today-content">
-        <section className="big-three-placeholder">
-          <h3>🎯 Big Three</h3>
-          <p className="muted">
-            Your three most important tasks will appear here.
-            <br />
-            <small>Coming in Milestone 5</small>
-          </p>
-        </section>
+      {!hasPlan && (
+        <div className="start-day-prompt">
+          <div className="panel">
+            <h2>Ready to start your day?</h2>
+            <p className="muted">
+              Review yesterday's progress and plan what matters today.
+            </p>
+            <button onClick={handleStartDay} className="btn-start-day">
+              Start Today
+            </button>
+          </div>
+        </div>
+      )}
 
-        <TodayTaskList />
-      </div>
+      {hasPlan && (
+        <div className="today-content">
+          <section className="big-three-placeholder">
+            <h3>🎯 Big Three</h3>
+            <p className="muted">
+              Your three most important tasks will appear here.
+              <br />
+              <small>Coming in Milestone 5</small>
+            </p>
+          </section>
+
+          <TodayTaskList />
+        </div>
+      )}
+
+      {showReview && (
+        <ReviewModal
+          onClose={handleReviewClose}
+          onContinue={handleReviewContinue}
+        />
+      )}
     </div>
   );
 }
