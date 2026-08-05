@@ -154,8 +154,8 @@ public class DailyPlanController {
             dailyPlanTaskRepository.save(dpt);
         }
         
-        // Return the tasks
-        List<Task> tasks = taskRepository.findAllById(taskIds);
+        // Return the tasks in the correct order
+        List<Task> tasks = getTasksInOrder(taskIds);
         return ResponseEntity.ok(tasks);
     }
     
@@ -178,8 +178,20 @@ public class DailyPlanController {
         
         List<Long> taskIds = bigThreeTasks.stream().map(DailyPlanTask::getTaskId).toList();
         
-        List<Task> tasks = taskRepository.findAllById(taskIds);
+        List<Task> tasks = getTasksInOrder(taskIds);
         return ResponseEntity.ok(tasks);
+    }
+    
+    private List<Task> getTasksInOrder(List<Long> taskIds) {
+        // findAllById doesn't preserve order, so we need to manually sort
+        List<Task> allTasks = taskRepository.findAllById(taskIds);
+        Map<Long, Task> taskMap = allTasks.stream()
+            .collect(Collectors.toMap(Task::getId, t -> t));
+        
+        return taskIds.stream()
+            .map(taskMap::get)
+            .filter(t -> t != null)
+            .collect(Collectors.toList());
     }
     
     private void autoSelectBigThreeIfNeeded(DailyPlan plan) {
