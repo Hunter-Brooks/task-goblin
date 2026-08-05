@@ -21,32 +21,12 @@ export function TodayTaskList() {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
-  // Get all active tasks
+  // Get all active tasks sorted by priority
   const activeTasks = tasks?.filter((task) => task.status !== 'COMPLETED') || []
-
-  // First, try to get priority/dated tasks
-  const priorityAndDatedTasks = activeTasks.filter((task) => {
-    // Include high-priority tasks
-    if (task.priority === 'HIGH') return true
-
-    // Include tasks due today or overdue
-    if (task.dueDate) {
-      const dueDate = new Date(task.dueDate)
-      dueDate.setHours(0, 0, 0, 0)
-      if (dueDate <= today) return true
-    }
-
-    return false
-  })
-
-  // If we have priority/dated tasks, use those. Otherwise show all active tasks.
-  let todayTasks = priorityAndDatedTasks.length > 0 
-    ? priorityAndDatedTasks 
-    : activeTasks
 
   // Sort by priority: HIGH > MEDIUM > LOW
   const priorityOrder = { HIGH: 1, MEDIUM: 2, LOW: 3 }
-  todayTasks = todayTasks.sort((a, b) => 
+  const todayTasks = activeTasks.sort((a, b) => 
     priorityOrder[a.priority] - priorityOrder[b.priority]
   )
 
@@ -92,9 +72,6 @@ export function TodayTaskList() {
     return <TaskForm task={editingTask} onCancel={() => setEditingTask(null)} />
   }
 
-  // Determine what we're showing
-  const showingPriorityTasks = priorityAndDatedTasks.length > 0
-
   if (!todayTasks.length) {
     return (
       <div className="panel">
@@ -106,12 +83,7 @@ export function TodayTaskList() {
 
   return (
     <div className="panel">
-      <h3>{showingPriorityTasks ? "Today's Focus" : "All Tasks"}</h3>
-      {!showingPriorityTasks && (
-        <p className="muted" style={{ marginTop: '0.5rem' }}>
-          Showing all tasks by priority. Add due dates or set high priority to focus your list.
-        </p>
-      )}
+      <h3>All Tasks</h3>
       <ul className="task-list">
         {todayTasks.map((task) => (
           <li key={task.id} className={task.status === 'COMPLETED' ? 'completed' : ''}>
