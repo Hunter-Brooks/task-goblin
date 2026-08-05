@@ -1,4 +1,3 @@
-import { TaskForm } from '../features/tasks/components/TaskForm'
 import { TaskList } from '../features/tasks/components/TaskList'
 
 export function TodayPage() {
@@ -6,9 +5,8 @@ export function TodayPage() {
     <div className="page-grid">
       <section>
         <h2>Today</h2>
-        <p className="muted">Capture tasks and keep today’s work visible.</p>
+        <p className="muted">Focus on today's work. Use quick capture (✚ or press Q) to add new items.</p>
       </section>
-      <TaskForm />
       <TaskList />
     </div>
   )
