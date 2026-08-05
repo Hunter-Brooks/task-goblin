@@ -405,6 +405,68 @@ button:disabled {
 .priority-high { background: #dc2626; }
 .error { color: #fca5a5; }
 
+/* Today Page Styles */
+.today-page {
+  display: grid;
+  gap: 2rem;
+}
+
+.today-header {
+  padding: 2rem 0 1rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.greeting-section h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.today-date {
+  margin: 0;
+  font-size: 1.125rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.today-content {
+  display: grid;
+  gap: 2rem;
+}
+
+.big-three-placeholder {
+  background: rgba(52, 211, 153, 0.08);
+  border: 2px dashed rgba(52, 211, 153, 0.3);
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.big-three-placeholder h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  color: #34d399;
+}
+
+.big-three-placeholder p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.big-three-placeholder small {
+  opacity: 0.7;
+  font-size: 0.875rem;
+}
+
+.due-date.today {
+  color: #60a5fa;
+  font-weight: 600;
+}
+
 @media (max-width: 900px) {
   .app-shell {
     grid-template-columns: 1fr;
