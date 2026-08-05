@@ -2,6 +2,30 @@
 
 Task Goblin is a local-first personal productivity app focused on quick capture, daily planning, and focused execution.
 
+## Current Status
+
+**Milestones 1-3 Complete** ✅
+
+- ✅ **Milestone 1:** Complete Task Management (create, edit, delete, complete, due dates)
+- ✅ **Milestone 2:** Inbox System (quick capture, convert to tasks, global quick capture with FAB and keyboard shortcuts)
+- ✅ **Milestone 3:** Today Experience (personalized greeting, all tasks sorted by priority, Big Three placeholder)
+
+See [DEVELOPMENT_ROADMAP.md](docs/DEVELOPMENT_ROADMAP.md) for detailed feature breakdown and future milestones.
+
+## Features
+
+### Current Features
+- **Task Management:** Create, edit, delete, and complete tasks with priorities and due dates
+- **Quick Capture:** Global quick capture accessible via FAB button (✚) or keyboard shortcut (Q)
+- **Inbox:** Capture ideas quickly and convert them to tasks during planning
+- **Today View:** Personalized greeting with all tasks sorted by priority
+- **Navigation:** Clean sidebar navigation between Today, Tasks, and Inbox pages
+
+### Coming Soon
+- Daily Planning workflow (Milestone 4)
+- Big Three daily priorities (Milestone 5)
+- Focus Mode and Morning Habits (Milestone 6)
+
 ## Structure
 
 - `backend/` – Spring Boot REST API with SQLite persistence

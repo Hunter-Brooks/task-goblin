@@ -1,7 +1,8 @@
 # Task Goblin — Architecture Document
 
-**Version:** 0.1  
+**Version:** 0.3  
 **Status:** Draft
+**Implementation:** Milestones 1-3 Complete
 
 ---
 
@@ -78,25 +79,22 @@ A service layer should only be introduced when business logic becomes complex en
 
 # 4. Backend Project Structure
 
-backend/src/main/java/com/taskgoblin/app/
+backend/src/main/java/com/taskgoblin/backend/
 
-├── controller/
-│ ├── TaskController.java
-│ ├── InboxController.java
-│ ├── DailyPlanController.java
-│ └── HabitController.java
-├── model/
-│ ├── Task.java
-│ ├── Project.java
-│ ├── InboxItem.java
-│ ├── Habit.java
-│ └── DailyPlan.java
-├── repository/
-│ ├── TaskRepository.java
-│ ├── ProjectRepository.java
-│ ├── InboxRepository.java
-│ └── HabitRepository.java
-└── TaskGoblinApplication.java
+├── TaskController.java ✅
+├── InboxController.java ✅
+├── Task.java ✅
+├── InboxItem.java ✅
+├── TaskRepository.java ✅
+├── InboxRepository.java ✅
+└── BackendApplication.java ✅
+
+## Implementation Status
+
+✅ **Implemented:** Task, InboxItem entities and controllers
+⏳ **Future:** Project, Habit, DailyPlan (Milestones 4-6)
+
+Note: Current implementation uses a flat package structure. Service layer and organizing into packages will be done when complexity justifies it.
 
 ---
 
@@ -350,44 +348,48 @@ Feature-based organization.
 
 frontend/src/
 
-├── features/
-│
-│   ├── today/
-│   │   ├── TodayPage.tsx
-│   │   ├── BigThree.tsx
-│   │   └── todayApi.ts
-│   │
-│   ├── planning/
-│   │   ├── PlanningPage.tsx
-│   │   ├── PriorityMatrix.tsx
-│   │   └── planningApi.ts
-│   │
-│   ├── inbox/
-│   │   ├── InboxPanel.tsx
-│   │   └── inboxApi.ts
-│   │
-│   ├── tasks/
-│   │   ├── TaskExplorer.tsx
-│   │   ├── TaskItem.tsx
-│   │   └── taskApi.ts
-│   │
-│   ├── focus/
-│   │   └── FocusMode.tsx
-│   │
-│   └── habits/
+├── api/
+│   ├── tasks.ts ✅
+│   └── inbox.ts ✅
 │
 ├── components/
+│   ├── AppLayout.tsx ✅
+│   └── GlobalQuickCapture.tsx ✅
 │
-├── api/
-│   └── client.ts
-│
-├── hooks/
-│
-├── types/
+├── features/
+│   ├── tasks/
+│   │   ├── components/
+│   │   │   ├── TaskForm.tsx ✅
+│   │   │   ├── TaskList.tsx ✅
+│   │   │   └── TodayTaskList.tsx ✅
+│   │   ├── hooks/
+│   │   │   └── useTasks.ts ✅
+│   │   └── types/
+│   │       └── task.ts ✅
+│   │
+│   └── inbox/
+│       ├── components/
+│       │   ├── InboxForm.tsx ✅
+│       │   └── InboxList.tsx ✅
+│       ├── hooks/
+│       │   └── useInbox.ts ✅
+│       └── types/
+│           └── inbox.ts ✅
 │
 ├── pages/
+│   ├── TodayPage.tsx ✅
+│   ├── TasksPage.tsx ✅
+│   ├── InboxPage.tsx ✅
+│   ├── PlanningPage.tsx ⏳
+│   └── FocusPage.tsx ⏳
 │
-└── App.tsx
+├── index.css ✅
+└── main.tsx ✅
+
+## Implementation Status
+
+✅ **Milestone 1-3 Complete:** Task management, Inbox system, Today experience
+⏳ **Future:** Planning, Focus, Habits features
 11. Navigation
 
 Primary navigation remains intentionally small.

@@ -1,7 +1,7 @@
 # Task Goblin — Product Requirements Document (PRD)
 
-**Version:** 0.1  
-**Status:** Draft  
+**Version:** 0.3  
+**Status:** Active Development (Milestones 1-3 Complete)  
 **Platform:** Windows Desktop/Web MVP → Android later  
 **User:** Single user (personal productivity)
 
