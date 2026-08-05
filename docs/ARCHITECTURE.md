@@ -1,8 +1,8 @@
 # Task Goblin — Architecture Document
 
-**Version:** 0.3  
+**Version:** 0.4  
 **Status:** Draft
-**Implementation:** Milestones 1-3 Complete
+**Implementation:** Milestones 1-4 Complete
 
 ---
 
@@ -83,16 +83,19 @@ backend/src/main/java/com/taskgoblin/backend/
 
 ├── TaskController.java ✅
 ├── InboxController.java ✅
+├── DailyPlanController.java ✅
 ├── Task.java ✅
 ├── InboxItem.java ✅
+├── DailyPlan.java ✅
 ├── TaskRepository.java ✅
 ├── InboxRepository.java ✅
+├── DailyPlanRepository.java ✅
 └── BackendApplication.java ✅
 
 ## Implementation Status
 
-✅ **Implemented:** Task, InboxItem entities and controllers
-⏳ **Future:** Project, Habit, DailyPlan (Milestones 4-6)
+✅ **Implemented:** Task, InboxItem, DailyPlan entities and controllers
+⏳ **Future:** Project, Habit (Milestones 5-6)
 
 Note: Current implementation uses a flat package structure. Service layer and organizing into packages will be done when complexity justifies it.
 
