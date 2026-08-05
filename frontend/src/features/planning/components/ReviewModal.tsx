@@ -71,7 +71,9 @@ export function ReviewModal({ onClose, onContinue }: ReviewModalProps) {
                   <span className={task.completedAt ? "completed-task" : ""}>
                     {task.title}
                   </span>
-                  {task.completedAt && <span className="completed-mark">✓</span>}
+                  {task.completedAt && (
+                    <span className="completed-mark">✓</span>
+                  )}
                 </li>
               ))}
             </ol>

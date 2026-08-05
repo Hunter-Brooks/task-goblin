@@ -124,7 +124,9 @@ export interface BigThreeTask {
   completedAt?: string;
 }
 
-export async function updateBigThree(taskIds: number[]): Promise<BigThreeTask[]> {
+export async function updateBigThree(
+  taskIds: number[],
+): Promise<BigThreeTask[]> {
   try {
     const response = await fetch(`${API_BASE_URL}/api/daily-plan/big-three`, {
       method: "PUT",

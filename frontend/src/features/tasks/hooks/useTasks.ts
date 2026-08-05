@@ -21,7 +21,9 @@ export function useCreateTask() {
     mutationFn: (task: TaskInput) => createTask(task),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: ["tasks"] });
-      void queryClient.invalidateQueries({ queryKey: ["dailyPlan", "bigThree"] });
+      void queryClient.invalidateQueries({
+        queryKey: ["dailyPlan", "bigThree"],
+      });
     },
   });
 }
@@ -34,7 +36,9 @@ export function useUpdateTask() {
       updateTask(id, task),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: ["tasks"] });
-      void queryClient.invalidateQueries({ queryKey: ["dailyPlan", "bigThree"] });
+      void queryClient.invalidateQueries({
+        queryKey: ["dailyPlan", "bigThree"],
+      });
     },
   });
 }
@@ -46,7 +50,9 @@ export function useDeleteTask() {
     mutationFn: (id: number) => deleteTask(id),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: ["tasks"] });
-      void queryClient.invalidateQueries({ queryKey: ["dailyPlan", "bigThree"] });
+      void queryClient.invalidateQueries({
+        queryKey: ["dailyPlan", "bigThree"],
+      });
     },
   });
 }

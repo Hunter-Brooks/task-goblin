@@ -16,7 +16,8 @@ export function BigThreeSelector() {
   }, [bigThree]);
 
   // Filter to show only active tasks
-  const activeTasks = tasks?.filter((task) => task.status !== "COMPLETED") || [];
+  const activeTasks =
+    tasks?.filter((task) => task.status !== "COMPLETED") || [];
 
   // Sort by priority: HIGH > MEDIUM > LOW
   const priorityOrder = { HIGH: 1, MEDIUM: 2, LOW: 3 };
@@ -75,7 +76,8 @@ export function BigThreeSelector() {
     <section className="panel">
       <h3>🎯 Select Big Three</h3>
       <p className="muted">
-        Choose up to three tasks that matter most today. Click to select/deselect.
+        Choose up to three tasks that matter most today. Click to
+        select/deselect.
       </p>
 
       {sortedTasks.length === 0 ? (
@@ -108,7 +110,9 @@ export function BigThreeSelector() {
                     {task.description && <p>{task.description}</p>}
                     {task.dueDate && <div>{formatDueDate(task.dueDate)}</div>}
                   </div>
-                  <span className={`pill priority-${task.priority.toLowerCase()}`}>
+                  <span
+                    className={`pill priority-${task.priority.toLowerCase()}`}
+                  >
                     {task.priority}
                   </span>
                 </li>
@@ -117,9 +121,7 @@ export function BigThreeSelector() {
           </ul>
 
           <div className="big-three-selector-footer">
-            <p className="muted">
-              Selected: {selectedIds.length}/3
-            </p>
+            <p className="muted">Selected: {selectedIds.length}/3</p>
             {hasChanges && (
               <button
                 onClick={handleSave}
