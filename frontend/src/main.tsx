@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import { AppLayout } from './components/AppLayout'
 import { TodayPage } from './pages/TodayPage'
+import { InboxPage } from './pages/InboxPage'
 import { PlanningPage } from './pages/PlanningPage'
 import { TasksPage } from './pages/TasksPage'
 import { FocusPage } from './pages/FocusPage'
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       { index: true, element: <TodayPage /> },
+      { path: 'inbox', element: <InboxPage /> },
       { path: 'planning', element: <PlanningPage /> },
       { path: 'tasks', element: <TasksPage /> },
       { path: 'focus', element: <FocusPage /> },

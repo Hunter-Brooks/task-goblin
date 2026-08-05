@@ -245,6 +245,154 @@ button:disabled {
   font-weight: 600;
 }
 
+.inbox-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.inbox-form label {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.inbox-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.inbox-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.875rem;
+  background: rgba(15, 23, 42, 0.7);
+}
+
+.inbox-content {
+  flex: 1;
+}
+
+.inbox-content p {
+  margin: 0 0 0.5rem;
+}
+
+.inbox-timestamp {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.inbox-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.btn-convert {
+  padding: 0.5rem 0.875rem;
+  font-size: 0.875rem;
+  background: rgba(52, 211, 153, 0.2);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  color: #34d399;
+}
+
+.btn-convert:hover {
+  background: rgba(52, 211, 153, 0.3);
+  border-color: rgba(52, 211, 153, 0.6);
+}
+
+.inbox-converting-content {
+  font-style: italic;
+  padding: 0.75rem;
+  background: rgba(52, 211, 153, 0.1);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.fab-quick-capture {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: #34d399;
+  color: #06281d;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: all 0.2s;
+}
+
+.fab-quick-capture:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.quick-capture-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.quick-capture-modal {
+  background: #1f2937;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.2s;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.quick-capture-modal form {
+  display: grid;
+  gap: 1rem;
+}
+
+.quick-capture-modal h2 {
+  margin: 0 0 0.5rem;
+}
+
+.quick-capture-modal textarea {
+  width: 100%;
+}
+
 .pill {
   border-radius: 999px;
   padding: 0.25rem 0.625rem;

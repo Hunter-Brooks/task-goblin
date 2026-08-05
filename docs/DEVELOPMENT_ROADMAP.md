@@ -76,7 +76,7 @@ Turn the existing task CRUD system into a usable task manager.
 
 ## Status
 
-🔄 Next Up
+✅ Complete
 
 ---
 
@@ -138,6 +138,25 @@ Add:
 
 ---
 
+## Implementation Notes
+
+Implemented:
+
+✅ Task completion/uncomplete with checkbox UI
+✅ Visual feedback (strikethrough, reduced opacity)
+✅ Task editing with inline form
+✅ Task deletion with confirmation dialog
+✅ Due date input and display
+✅ Overdue task highlighting (red text with warning icon)
+✅ Today tasks highlighted (yellow)
+✅ Toggleable task creation form (+ Add Task button)
+✅ Update and delete API integration
+✅ React hooks: useUpdateTask, useDeleteTask
+
+All features working with existing backend CRUD operations.
+
+---
+
 # Milestone 2 — Inbox System
 
 ## Goal
@@ -145,6 +164,10 @@ Add:
 Implement frictionless capture.
 
 The user should be able to record thoughts without deciding where they belong.
+
+## Status
+
+✅ Complete
 
 ---
 
@@ -203,6 +226,34 @@ Daily Planning
     ↓
 
 Task
+
+---
+
+## Implementation Notes
+
+Milestone 2 was enhanced with a **global quick capture system**:
+
+- **Floating Action Button (FAB)**: Always visible in bottom-right corner on all pages
+- **Keyboard Shortcut**: Press `Q` to open quick capture from anywhere
+- **Modal Overlay**: Clean capture interface that doesn't disrupt current page
+- **ESC to Close**: Quick escape from capture modal
+
+Architectural Decision:
+
+- Removed page-specific capture forms (InboxForm, TaskForm on pages)
+- Single global capture point reduces UI clutter
+- Consistent capture experience across entire application
+- All captures go to Inbox, then processed into Tasks during planning
+
+Implemented:
+
+✅ InboxItem entity (id, content, createdAt, processed)
+✅ InboxRepository and InboxController
+✅ REST API endpoints (GET, POST, DELETE, PUT /process)
+✅ Inbox page with item list
+✅ Convert-to-task workflow
+✅ Global quick capture accessible from all pages
+✅ Keyboard shortcuts for capture
 
 ---
 
