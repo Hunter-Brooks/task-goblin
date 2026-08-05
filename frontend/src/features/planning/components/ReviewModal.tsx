@@ -108,9 +108,16 @@ export function ReviewModal({ onClose, onContinue }: ReviewModalProps) {
                 <li key={task.id}>
                   <strong>{task.title}</strong>
                   <span className="due-date overdue">
-                    Due: {(() => {
-                      const [year, month, day] = task.dueDate.split('-').map(Number);
-                      return new Date(year, month - 1, day).toLocaleDateString();
+                    Due:{" "}
+                    {(() => {
+                      const [year, month, day] = task.dueDate
+                        .split("-")
+                        .map(Number);
+                      return new Date(
+                        year,
+                        month - 1,
+                        day,
+                      ).toLocaleDateString();
                     })()}
                   </span>
                 </li>

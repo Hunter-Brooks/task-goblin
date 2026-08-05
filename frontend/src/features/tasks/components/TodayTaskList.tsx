@@ -51,7 +51,7 @@ export function TodayTaskList() {
   const formatDueDate = (dateString?: string) => {
     if (!dateString) return null;
     // Parse date as local date to avoid timezone issues
-    const [year, month, day] = dateString.split('-').map(Number);
+    const [year, month, day] = dateString.split("-").map(Number);
     const date = new Date(year, month - 1, day);
     const dueDate = new Date(date);
     dueDate.setHours(0, 0, 0, 0);
