@@ -162,6 +162,7 @@ public class DailyPlanController {
     }
     
     @GetMapping("/big-three")
+    @Transactional
     public ResponseEntity<List<Task>> getBigThree() {
         LocalDate today = LocalDate.now();
         
