@@ -1,6 +1,7 @@
 package com.taskgoblin.backend;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -176,6 +177,28 @@ public class DailyPlanController {
             bigThreeTasks = dailyPlanTaskRepository.findByDailyPlanIdOrderByPosition(todayPlan.getId());
         }
         
+        List<Long> taskIds = bigThreeTasks.stream().map(DailyPlanTask::getTaskId).toList();
+        
+        List<Task> tasks = getTasksInOrder(taskIds);
+        return ResponseEntity.ok(tasks);
+    }
+    
+    @PostMapping("/big-three/refresh")
+    @Transactional
+    public ResponseEntity<List<Task>> refreshBigThree() {
+        LocalDate today = LocalDate.now();
+        
+        DailyPlan todayPlan = dailyPlanRepository.findByDate(today)
+            .orElseGet(() -> {
+                DailyPlan newPlan = new DailyPlan(today);
+                return dailyPlanRepository.save(newPlan);
+            });
+        
+        // Delete existing and force re-selection
+        dailyPlanTaskRepository.deleteByDailyPlanId(todayPlan.getId());
+        autoSelectBigThreeIfNeeded(todayPlan);
+        
+        List<DailyPlanTask> bigThreeTasks = dailyPlanTaskRepository.findByDailyPlanIdOrderByPosition(todayPlan.getId());
         List<Long> taskIds = bigThreeTasks.stream().map(DailyPlanTask::getTaskId).toList();
         
         List<Task> tasks = getTasksInOrder(taskIds);
