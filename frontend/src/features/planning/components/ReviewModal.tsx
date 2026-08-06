@@ -61,6 +61,25 @@ export function ReviewModal({ onClose, onContinue }: ReviewModalProps) {
         <h2>📅 Yesterday's Review</h2>
         <p className="review-date">{formattedDate}</p>
 
+        {review.bigThree && review.bigThree.length > 0 && (
+          <section className="review-section">
+            <h3>🎯 Big Three</h3>
+            <ol className="review-big-three">
+              {review.bigThree.map((task, index) => (
+                <li key={task.id}>
+                  <span className="big-three-number">{index + 1}</span>
+                  <span className={task.completedAt ? "completed-task" : ""}>
+                    {task.title}
+                  </span>
+                  {task.completedAt && (
+                    <span className="completed-mark">✓</span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
+
         {review.completedTasks.length > 0 && (
           <section className="review-section">
             <h3>✅ Completed ({review.completedTasks.length})</h3>

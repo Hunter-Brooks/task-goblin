@@ -3,8 +3,11 @@ import {
   getTodaysPlan,
   startDay,
   getPreviousDayReview,
+  getBigThree,
+  updateBigThree,
   type DailyPlan,
   type PreviousDayReview,
+  type BigThreeTask,
 } from "../../../api/dailyPlan";
 
 export function useTodaysPlan() {
@@ -33,5 +36,23 @@ export function usePreviousDayReview() {
     queryFn: getPreviousDayReview,
     staleTime: 5 * 60 * 1000, // 5 minutes
     retry: 1,
+  });
+}
+
+export function useBigThree() {
+  return useQuery<BigThreeTask[]>({
+    queryKey: ["dailyPlan", "bigThree"],
+    queryFn: getBigThree,
+  });
+}
+
+export function useUpdateBigThree() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (taskIds: number[]) => updateBigThree(taskIds),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["dailyPlan", "bigThree"] });
+    },
   });
 }

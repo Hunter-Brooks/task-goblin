@@ -5,6 +5,7 @@ import {
   useStartDay,
 } from "../features/planning/hooks/useDailyPlan";
 import { ReviewModal } from "../features/planning/components/ReviewModal";
+import { BigThreeDisplay } from "../features/planning/components/BigThreeDisplay";
 
 export function TodayPage() {
   const now = new Date();
@@ -83,14 +84,7 @@ export function TodayPage() {
 
       {hasPlan && (
         <div className="today-content">
-          <section className="big-three-placeholder">
-            <h3>🎯 Big Three</h3>
-            <p className="muted">
-              Your three most important tasks will appear here.
-              <br />
-              <small>Coming in Milestone 5</small>
-            </p>
-          </section>
+          <BigThreeDisplay />
 
           <TodayTaskList />
         </div>
