@@ -146,11 +146,8 @@ export function ReviewModal({ onClose, onContinue }: ReviewModalProps) {
         )}
 
         <div className="modal-actions">
-          <button onClick={onContinue} className="btn-primary">
-            Start Today
-          </button>
           <button onClick={onClose} className="btn-secondary">
-            Cancel
+            Close
           </button>
         </div>
       </div>

@@ -500,7 +500,6 @@ button:disabled {
 }
 
 .btn-start-day {
-  margin-top: 1.5rem;
   padding: 1rem 2rem;
   font-size: 1.125rem;
   background: linear-gradient(135deg, #34d399 0%, #10b981 100%);

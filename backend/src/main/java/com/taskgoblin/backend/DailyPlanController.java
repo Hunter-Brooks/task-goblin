@@ -319,4 +319,23 @@ public class DailyPlanController {
             // 4. Finally by creation date (older tasks first to avoid procrastination)
             .thenComparing(Task::getCreatedAt);
     }
+    
+    @DeleteMapping("/today")
+    @Transactional
+    public ResponseEntity<Void> deleteTodaysPlan() {
+        LocalDate today = LocalDate.now();
+        DailyPlan plan = dailyPlanRepository.findByDate(today).orElse(null);
+        
+        if (plan == null) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        // Delete associated Big Three tasks first
+        dailyPlanTaskRepository.deleteByDailyPlanId(plan.getId());
+        
+        // Delete the daily plan
+        dailyPlanRepository.delete(plan);
+        
+        return ResponseEntity.noContent().build();
+    }
 }
