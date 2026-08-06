@@ -25,7 +25,15 @@ export function TodayPage() {
   const startDay = useStartDay();
   const [showReview, setShowReview] = useState(false);
 
-  const handleStartDay = () => {
+  const handleStartDay = async () => {
+    try {
+      await startDay.mutateAsync();
+    } catch (error) {
+      console.error("Failed to start day:", error);
+    }
+  };
+
+  const handleShowReview = () => {
     setShowReview(true);
   };
 
@@ -73,11 +81,16 @@ export function TodayPage() {
           <div className="panel">
             <h2>Ready to start your day?</h2>
             <p className="muted">
-              Review yesterday's progress and plan what matters today.
+              Start your day now or review yesterday's progress first.
             </p>
-            <button onClick={handleStartDay} className="btn-start-day">
-              Start Today
-            </button>
+            <div className="start-day-actions">
+              <button onClick={handleStartDay} className="btn-start-day">
+                Start Today
+              </button>
+              <button onClick={handleShowReview} className="btn-review-yesterday">
+                Review Yesterday
+              </button>
+            </div>
           </div>
         </div>
       )}
