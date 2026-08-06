@@ -294,6 +294,17 @@ Get Today's Plan
 GET /api/daily-plan/today
 Update Big Three
 PUT /api/daily-plan/big-three
+
+Delete Today's Plan
+
+DELETE /api/daily-plan/today
+
+Used for:
+
+Testing reset
+Day restart scenarios
+Development workflows
+
 Review
 Get Previous Day Review
 GET /api/review/previous-day

@@ -396,7 +396,7 @@ Create focused daily priorities.
 
 ## Status: ✅ COMPLETE
 
-Branch: `milestone-5` (9 commits)
+Branch: `milestone-5` (11 commits, latest: 468e7e0)
 
 Implemented:
 
@@ -411,6 +411,11 @@ Implemented:
 ✅ Transaction handling for data mutations
 ✅ Review modal shows previous day's Big Three
 ✅ Comprehensive CSS styling
+✅ **UX Improvements:**
+  - Dual-button start day flow: "Start Today" (immediate) + "Review Yesterday" (optional)
+  - Simplified review modal to view-only (removed action buttons)
+  - Fixed button alignment with flexbox layout
+  - DELETE /api/daily-plan/today endpoint for day reset
 
 ---
 
@@ -420,6 +425,16 @@ Rules:
 - Selected during planning.
 - Auto-refills when task deleted (maintains 3 active tasks).
 - Reviewed the next day.
+
+---
+
+UX Design:
+
+Start Day Flow:
+- Two independent actions: immediate start vs. optional review
+- Users choose whether to review yesterday before starting today
+- Review modal displays information only (no forced workflow)
+- Clean button layout with proper alignment
 
 ---
 

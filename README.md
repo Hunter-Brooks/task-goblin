@@ -10,7 +10,7 @@ Task Goblin is a local-first personal productivity app focused on quick capture,
 - ✅ **Milestone 2:** Inbox System (quick capture, convert to tasks, global quick capture with FAB and keyboard shortcuts)
 - ✅ **Milestone 3:** Today Experience (personalized greeting, all tasks sorted by priority, Big Three placeholder)
 - ✅ **Milestone 4:** Daily Planning (start day flow, review workflow, planning page structure)
-- ✅ **Milestone 5:** Big Three System (auto-selection, manual selection UI, due dates, auto-refill, completion celebration)
+- ✅ **Milestone 5:** Big Three System (auto-selection, manual selection UI, improved start day UX with dual-button choice, view-only review modal, auto-refill, completion celebration)
 
 See [DEVELOPMENT_ROADMAP.md](docs/DEVELOPMENT_ROADMAP.md) for detailed feature breakdown and future milestones.
 
@@ -22,7 +22,7 @@ See [DEVELOPMENT_ROADMAP.md](docs/DEVELOPMENT_ROADMAP.md) for detailed feature b
 - **Quick Capture:** Global quick capture accessible via FAB button (✚) or keyboard shortcut (Q)
 - **Inbox:** Capture ideas quickly and convert them to tasks during planning
 - **Today View:** Personalized greeting with all tasks sorted by priority
-- **Daily Planning:** Start day flow with review of yesterday's work, unfinished priorities, and overdue tasks
+- **Daily Planning:** Start day flow with dual-button choice (immediate start or review yesterday first), view-only review modal showing yesterday's work, unfinished priorities, and overdue tasks
 - **Big Three:** Three daily priorities with intelligent auto-selection, manual selection UI, due date display, auto-refill on deletion, and celebration message when all complete
 - **Navigation:** Clean sidebar navigation between Today, Tasks, Inbox, and Planning pages
 
